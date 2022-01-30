@@ -18,7 +18,7 @@ const NewBotResponse = (props) => {
           message: message,
         },
       },
-      console.log.bind(null, message)
+      console.log
     );
   };
 

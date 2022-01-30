@@ -13,6 +13,8 @@ const UserResponseForm = (props) => {
     if (enteredValue.trim().length > 0) {
       props.onEnterMessage(enteredValue);
     }
+
+    messageInputRef.current.value = "";
   };
 
   return (
