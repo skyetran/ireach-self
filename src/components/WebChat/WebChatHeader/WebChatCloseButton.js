@@ -1,5 +1,4 @@
 import CloseButton from "react-bootstrap/CloseButton";
-import WebChatCloseButtonContainer from "./WebChatCloseButtonContainer";
 
 const WebChatCloseButton = () => {
   const clickHandler = () => {
@@ -7,11 +6,11 @@ const WebChatCloseButton = () => {
   };
 
   return (
-    <WebChatCloseButtonContainer>
+    <ul className="navbar-nav ms-auto">
       <li className="nav-item">
         <CloseButton onClick={clickHandler} />
       </li>
-    </WebChatCloseButtonContainer>
+    </ul>
   );
 };
 

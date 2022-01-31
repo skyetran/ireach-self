@@ -1,13 +1,14 @@
 import WebChatAlfieProfile from "./WebChatAlfieProfile";
 import WebChatCloseButton from "./WebChatCloseButton";
-import WebChatHeaderContainer from "./WebChatHeaderContainer";
 
 const WebChatHeader = (props) => {
   return (
-    <WebChatHeaderContainer>
-      <WebChatAlfieProfile />
-      <WebChatCloseButton />
-    </WebChatHeaderContainer>
+    <div className="card-header bg-transparent">
+      <div className="navbar navbar-expand p-0">
+        <WebChatAlfieProfile />
+        <WebChatCloseButton />
+      </div>
+    </div>
   );
 };
 
