@@ -1,16 +1,31 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+
 import AlfieMessage from "./AlfieMessage";
-import WebChatBodyContainer from "./WebChatBodyContainer"
+import UserMessage from "./UserMessage";
+import WebChatBodyContainer from "./WebChatBodyContainer";
 
 const WebChatBody = () => {
+  const messages = useSelector((state) => state.chatHistory.messages);
+
   return (
     <WebChatBodyContainer>
-      <AlfieMessage />
-
-      <div className="d-flex align-items-baseline text-end justify-content-end mb-4">
-        <div className="card d-inline-block p-2 px-3 m-1">
-          Go to hell and die please!asdfffffff sdfasfdsadfsdfsasadf sdasdf sd
-        </div>
-      </div>
+      {messages.map((message) => {
+        return (
+          (message.hasOwnProperty("alfie") && (
+            <AlfieMessage
+              key={messages.indexOf(message)}
+              text={message.alfie.text}
+            />
+          )) ||
+          (message.hasOwnProperty("user") && (
+            <UserMessage
+              key={messages.indexOf(message)}
+              buttons={message.user.buttons}
+            />
+          ))
+        );
+      })}
     </WebChatBodyContainer>
   );
 };

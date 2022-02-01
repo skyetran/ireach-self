@@ -1,24 +1,19 @@
-import { useEffect } from "react";
-import useRasa from "../../hooks/use-rasa";
+import Button from "react-bootstrap/Button";
+
+import useRasa from "../../../hooks/use-rasa";
 
 const ConversationEntry = (props) => {
-  const { responses, injectIntent } = useRasa();
+  const { injectIntent } = useRasa();
 
-  useEffect(() => {
-    if (responses.length > 0) {
-      console.log(responses);
-    }
-  }, [responses]);
-
-  const injectIntentHandler = async () => {
-    injectIntent({
-      name: props.intentNameRasa,
-    });
+  const clickHandler = async () => {
+    injectIntent(props.payload);
   };
 
   return (
-    <div>
-      <button onClick={injectIntentHandler}>{props.intentNameUI}</button>
+    <div className="d-grid gap-2 mb-2">
+      <Button variant="primary" size="lg" onClick={clickHandler}>
+        {props.text}
+      </Button>
     </div>
   );
 };

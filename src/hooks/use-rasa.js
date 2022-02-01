@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import useHttp from "./use-http";
+import { chatHistoryActions } from "../store/chat-history-slice";
 
 const getParsedMessages = (data) => {
   var parsedMessages = [];
@@ -99,6 +101,7 @@ const getEntities = (tokenizedPayload) => {
 };
 
 const useRasa = () => {
+  const dispatch = useDispatch()
   const [responses, setResponses] = useState([]);
   const { isloading, error, sendRequest } = useHttp();
 
@@ -106,6 +109,17 @@ const useRasa = () => {
     const parsedMessages = getParsedMessages(data);
     setResponses(parsedMessages);
   };
+
+  useEffect(() => {
+    if (responses.length > 0) {
+      for (const response of responses) {
+        response.hasOwnProperty("text") &&
+          dispatch(chatHistoryActions.addNewAlfieMessage(response));
+        response.hasOwnProperty("buttons") &&
+          dispatch(chatHistoryActions.addNewUserMessage(response));
+      }
+    }
+  }, [responses, dispatch]);
 
   const injectIntent = async (payload) => {
     sendRequest(
